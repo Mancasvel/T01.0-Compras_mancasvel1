@@ -13,29 +13,37 @@ import fp.compras.FactoriaCompras;
 public class TestEstadisticasCompra {
 
 	public static void testCompraMaximaMinimaProvincia(EstadisticasCompra e, String provincia) {
-		System.out.println("Las compras máximas y minimas de " + provincia + " son:");
+		System.out.println("Las compras mï¿½ximas y minimas de " + provincia + " son:");
 		System.out.println(e.compraMaximaMinimaProvincia(provincia));
 	}
 	
 	public static void testHoraMenosAfluencia(EstadisticasCompra e) {
 		System.out.println("La hora de menos afluencia es: " + e.horaMenosAfluencia());
 	}
+	public static void testMasComprasPersona(EstadisticasCompra e) {
+		System.out.println("El dni de la persona con mas compras es:" + e.personaMasCompras());
+	}
 	
 	public static void testSupermercadosMasFacturacion(EstadisticasCompra e, Integer n) {
-		System.out.println("Los supermercados de más facturación son: ");
+		System.out.println("Los supermercados de mï¿½s facturaciï¿½n son: ");
 		System.out.println(e.supermercadosMasFacturacion(n));
 		
 	}	
+	public static void testComprasPorPersona(EstadisticasCompra e) {
+		System.out.println("Las compras relacionadas con los DNIs son: ");
+		System.out.println(e.contarComprasPorPersona());
+		
+	}
 	
 	public static void testClientesItinerantes (EstadisticasCompra e, Integer n) {
-		System.out.println("Los clientes itinerantes con más de " + n + "provincias son");
+		System.out.println("Los clientes itinerantes con mï¿½s de " + n + "provincias son");
 		Map<String, List<String>> res = e.clientesItinerantes(n);
 		res.entrySet().stream()
 			.forEach(System.out::println);
 	}
 	
 	public static void testDiasEstrella(EstadisticasCompra e, String supermercado, String provincia) {
-		String msg = String.format("Los días estrella para el supermerado %s de la provincia %s son", supermercado, provincia);
+		String msg = String.format("Los dï¿½as estrella para el supermerado %s de la provincia %s son", supermercado, provincia);
 		System.out.println(msg);
 		List<LocalDate> res = e.diasEstrella(supermercado, provincia);
 		System.out.println(res);
@@ -55,6 +63,10 @@ public class TestEstadisticasCompra {
 		testClientesItinerantes(e, 7);
 		
 		testDiasEstrella(e, "Aldi", "Huelva");
+		
+		testComprasPorPersona(e);
+		
+		testMasComprasPersona(e);
 	}
 
 

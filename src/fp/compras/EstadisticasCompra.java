@@ -56,13 +56,28 @@ public class EstadisticasCompra {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() { 
 		String s= compras.stream()
 					.map(Compra::toString)
 					.collect(Collectors.joining(",\n"));
 		return "EstadisticasCompra [compras=" + s + "]";
 	}
 
+	public Map<String, Long> contarComprasPorPersona(){
+		return compras.stream()
+					.collect(Collectors.groupingBy(compra->compra.getDNI(),
+												   Collectors.counting()));
+	}
+	public String personaMasCompras() {
+		
+		Map<String, Long> conteo = contarComprasPorPersona();
+		Comparator<Map.Entry<String, Long>> c = Map.Entry.comparingByValue();
+		return conteo.entrySet().stream()
+				.max(c)
+				.get()
+				.getKey();
+		
+	}
 	
 	/**
 	 * @param provincia
@@ -100,6 +115,8 @@ public class EstadisticasCompra {
 					.collect(Collectors.groupingBy(compra->compra.getFechaLlegada().getHour(),
 												   Collectors.counting()));
 	}
+
+	
 
 	/**
 	 * @param n Número entero
